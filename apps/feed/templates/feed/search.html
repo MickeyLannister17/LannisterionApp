@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="tittle">Search</h1>
+
+                <p>Search term: "{{ query }}"</p>
+
+                <hr>
+
+                <form method="get" action="{% url 'search' %}">
+                    <div class="field">
+                        <div class="control">
+                            <input type="text" class="input" name="query" value="{{ query }}">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="search-result">
+                        {% for lannisterian in lannisterians %}
+                            <p>{{ lannisterian.username }}</p>
+                        {% endfor %}    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}               

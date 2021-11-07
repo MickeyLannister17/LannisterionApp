@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% load humanize %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">Followers - {{ user.username }}</h1>
+
+                <p>Num : {{ user.lannisterianprofile.followed_by.count }}</p>
+
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-8">
+                {% for lannisterian in user.lannisterianprofile.folowed_by.all %}
+                    <p><a href="{% url 'lannisterianprofile' lannisterian.user.username %}">{{ lannisterian.user.username }}</a></p>
+                {% empty %}
+                    {% if request.user == user %}
+                        <p>Sorry! you do not have any followers!</p>
+                    {% else %}
+                        <p>{{ user.username }} does not have any followers!</p>         
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}               
