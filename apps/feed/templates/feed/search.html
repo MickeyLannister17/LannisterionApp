@@ -28,9 +28,49 @@
                     <hr>
 
                     <div class="search-result">
-                        {% for lannisterian in lannisterians %}
-                            <p>{{ lannisterian.username }}</p>
-                        {% endfor %}    
+                        {% if not lannisterians and not posts %}
+                            <p>No results! please, try a different search term..</p>
+                        {% endif %}
+                        
+                        {% if lannisterians %}
+                            <strong>Lannisterians</strong>
+                                    
+                            {% for lannisterian in lannisterians %}
+                                <p><a href="{% url 'lannisterianprofile' lannisterian.username %}">{{lannisterian.username }}</a></p>
+                            {% endfor %}
+                            
+                        {% endif %}
+                        
+                        {% if posts %}
+
+                            <strong>Posts</strong>
+                            <div class="wrapper-posts">
+                                {% for post in posts %}
+
+                                    <article class="article">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                {% if post.created_by.lannisterianprofile.avatar %}
+                                                    <img src="{{ post.created_by.lannisterianprofile.avatar.url }}">
+                                                {% endif %}    
+                                            </p>
+                                        </figure>
+            
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <strong><a href="{% url 'lannisterianprofile' post.created_by.username %}">{{ post.created_by.username }}</a></strong>
+                                                    <small>{{ post.created_at|naturaltime }}</small>
+                                                    <br>
+                                                    {{ post.body }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>                                
+
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 </form>
             </div>
