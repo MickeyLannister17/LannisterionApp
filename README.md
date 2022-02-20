@@ -9,4 +9,4 @@
 ## You can also like a post, and, mention a user.
 ## Feel free to add more cool features to this project
 
-## Feel free to visit the life site (here)[https://lannisterion.herokuapp.com]
+## Feel free to visit the site by clicking [here](https://lannisterion.herokuapp.com)
